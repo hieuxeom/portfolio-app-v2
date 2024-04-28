@@ -34,15 +34,32 @@ export async function query({ sql, values = [] }: IQueryOptions): Promise<RowDat
 	const connectDb = await mysql.createConnection(connectOptions);
 
 	try {
-		const [results] = await connectDb.execute(sql, values);
+		const [results] = await connectDb.query<RowDataPacket[]>(sql, values);
 
 		connectDb.end();
-		return results as RowDataPacket[];
+		return results;
 	} catch (error) {
 		console.log(error);
 		return [];
 	}
 }
+
+export async function queryMany({ sql, values = [] }: IQueryOptions): Promise<RowDataPacket[][]> {
+	const connectOptions: ConnectionOptions = getConnectionOptions(process.env.NODE_ENV);
+
+	const connectDb = await mysql.createConnection({ ...connectOptions, multipleStatements: true });
+
+	try {
+		const [results] = await connectDb.query<RowDataPacket[][]>(sql, values);
+
+		connectDb.end();
+		return results;
+	} catch (error) {
+		console.log(error);
+		return [];
+	}
+}
+
 export async function queryOne({ sql, values = [] }: IQueryOptions): Promise<RowDataPacket> {
 	const connectOptions: ConnectionOptions = getConnectionOptions(process.env.NODE_ENV);
 
