@@ -1,6 +1,6 @@
 import { query, queryOne, type IQueryOptions } from "@/helpers/database";
 import { NextResponse } from "next/server";
-import { decodeToken } from "../auth.utils";
+import { decodeToken } from "../auth.services";
 
 export async function GET(request: Request) {
 	const accessToken = request.headers.get("authorization")?.split(" ")[1];

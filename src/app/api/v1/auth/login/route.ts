@@ -1,7 +1,7 @@
 import { query, type IQueryOptions } from "@/helpers/database";
 import type { IUser } from "@/types/User";
 import { NextResponse } from "next/server";
-import { comparePassword, generateAccessToken, generateRefreshToken } from "../auth.utils";
+import { comparePassword, generateAccessToken, generateRefreshToken } from "../auth.services";
 
 export async function GET(request: Request) {
 	return NextResponse.json({ status: "success", message: "Hello World" }, { status: 200 });

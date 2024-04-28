@@ -1,7 +1,7 @@
 import { query, type IQueryOptions } from "@/helpers/database";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { decodeToken, generateAccessToken } from "../auth.utils";
+import { decodeToken, generateAccessToken } from "../auth.services";
 import type { IUser } from "@/types/User";
 
 export async function GET(request: Request) {
